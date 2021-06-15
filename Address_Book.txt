@@ -1,0 +1,149 @@
+
+UC-1>
+
+mysql> create database Address_Book_Service;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| information_schema   |
+| mysql                |
+| payroll_service      |
+| performance_schema   |
+| stdp                 |
+| sys                  |
++----------------------+
+7 rows in set (0.00 sec)
+
+
+mysql> use address_book_service;
+Database changed
+mysql> select database();
++----------------------+
+| database()           |
++----------------------+
+| address_book_service |
++----------------------+
+1 row in set (0.00 sec)
+
+**************
+UC-2>.
+
+
+mysql> CREATE TABLE Address_Book(
+    ->  firstName  Varchar(50) NOT NULL,
+    ->  lastName Varchar(50) NOT NULL,
+    -> city Varchar(50) NOT NULL,
+    -> state Varchar(50) NOT NULL,
+    -> zip  int NOT NULL,
+    -> phone_Number  long NOT NULL,
+    -> email Varchar(50) Not Null );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> describe address_book;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| firstName    | varchar(50) | NO   |     | NULL    |       |
+| lastName     | varchar(50) | NO   |     | NULL    |       |
+| city         | varchar(50) | NO   |     | NULL    |       |
+| state        | varchar(50) | NO   |     | NULL    |       |
+| zip          | int         | NO   |     | NULL    |       |
+| phone_Number | mediumtext  | NO   |     | NULL    |       |
+| email        | varchar(50) | NO   |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+******************************
+UC-3>.
+
+mysql>  INSERT INTO address_book (firstName, lastName, city, state, zip, phone_Number, email) VALUES
+    -> ('pappu', 'kumar', 'Dbg', 'Bihar', '847403', '8871312779', 'pappu8871@gmail.com' ),
+    -> ('Aahan', 'kumar', 'jhanjharpur', 'Bihar', '847403', '7564082244', 'behat5544@gmail.com' );
+Query OK, 2 rows affected (0.02 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+mysql> select * from address_book;
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| firstName | lastName | city        | state | zip    | phone_Number | email               | emp_id |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| pappu     | kumar    | Dbg         | Bihar | 847403 | 8871312779   | pappu8871@gmail.com |      1 |
+| Aahan     | kumar    | jhanjharpur | Bihar | 847403 | 7564082244   | behat5544@gmail.com |      2 |
++-----------+----------+-------------+-------+--------+--------------+---------------------+------
+
+***************************
+UC-4>.
+
+mysql> update address_book set firstName = 'Rahul' where emp_id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| firstName | lastName | city        | state | zip    | phone_Number | email               | emp_id |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| Rahul     | kumar    | Dbg         | Bihar | 847403 | 8871312779   | pappu8871@gmail.com |      1 |
+| Aahan     | kumar    | jhanjharpur | Bihar | 847403 | 7564082244   | behat5544@gmail.com |      2 |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+2 rows in set (0.00 sec)
+*********************************
+UC-5>
+
+mysql> Delete from address_book where firstName = 'Rahul';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from address_book;
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| firstName | lastName | city        | state | zip    | phone_Number | email               | emp_id |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| Aahan     | kumar    | jhanjharpur | Bihar | 847403 | 7564082244   | behat5544@gmail.com |      2 |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+1 row in set (0.01 sec)
+
+**********************************
+
+UC-6>.
+
+mysql> select city from address_book where city = 'jhanjharpur';
++-------------+
+| city        |
++-------------+
+| jhanjharpur |
++-------------+
+1 row in set (0.00 sec)
+********************************
+UC-7>
+mysql> INSERT INTO address_book (firstName, lastName, city, state, zip, phone_Number, email, emp_id) VALUES
+    -> ('pappu', 'kumar', 'Dbg', 'Bihar', '847403', '8871312779', 'pappu8871@gmail.com',01 );
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from address_book;
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| firstName | lastName | city        | state | zip    | phone_Number | email               | emp_id |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+| Aahan     | kumar    | jhanjharpur | Bihar | 847403 | 7564082244   | behat5544@gmail.com |      2 |
+| pappu     | kumar    | Dbg         | Bihar | 847403 | 8871312779   | pappu8871@gmail.com |      1 |
++-----------+----------+-------------+-------+--------+--------------+---------------------+--------+
+2 rows in set (0.01 sec)
+
+
+----------+-------------+-------+--------+--------------+----------' at line 1
+mysql> select count(city) from address_book;
++-------------+
+| count(city) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(state) from address_book;
++--------------+
+| count(state) |
++--------------+
+|            2 |
++--------------+
+1 row in set (0.00 sec)
